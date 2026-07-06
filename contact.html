@@ -19,13 +19,19 @@
 
 <link rel="stylesheet" href="css/responsive.css">
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 </head>
 
 <body>
 
 <header>
 
-<div class="logo">THE18FREG</div>
+<div class="logo">
+
+THE18FREG
+
+</div>
 
 <nav>
 
@@ -35,7 +41,7 @@
 
 <a href="about.html">Our Story</a>
 
-<a href="contact.html">Contact</a>
+<a href="contact.html" class="active">Contact</a>
 
 </nav>
 
@@ -51,38 +57,41 @@ CONTACT US
 
 <h1>
 
-We're Here To Help
+Let's Talk Fragrance
 
 </h1>
 
 <p>
 
-Have questions about our fragrances or your order?
-Feel free to contact us anytime.
+Need help with your order?
+
+Have a question?
+
+We'd love to hear from you.
 
 </p>
 
 </section>
 
-<section class="contact-grid">
+<section class="contact-wrapper">
 
-<div class="contact-card">
+<div class="contact-info">
 
-<h3>📞 Phone / WhatsApp</h3>
+<div class="info-box">
+
+<h3>📞 Call / WhatsApp</h3>
 
 <p>+91 95874 92034</p>
 
-<a href="https://wa.me/919587492034"
-class="dark-btn"
-target="_blank">
+<a href="https://wa.me/919587492034" target="_blank">
 
-Chat on WhatsApp
+Chat Now
 
 </a>
 
 </div>
 
-<div class="contact-card">
+<div class="info-box">
 
 <h3>📧 Email</h3>
 
@@ -92,8 +101,7 @@ the18freg@gmail.com
 
 </p>
 
-<a href="mailto:the18freg@gmail.com"
-class="dark-btn">
+<a href="mailto:the18freg@gmail.com">
 
 Send Email
 
@@ -101,7 +109,7 @@ Send Email
 
 </div>
 
-<div class="contact-card">
+<div class="info-box">
 
 <h3>📸 Instagram</h3>
 
@@ -111,82 +119,79 @@ Send Email
 
 </p>
 
-<a href="https://instagram.com/the.18freg"
-class="dark-btn"
-target="_blank">
+<a href="https://instagram.com/the.18freg" target="_blank">
 
-Follow Us
+Follow Now
 
 </a>
 
 </div>
 
-</section><section class="contact-form-section">
+</div>
 
-    <span class="section-tag">SEND A MESSAGE</span>
+<div class="contact-form-box">
 
-    <h2>Get In Touch</h2>
+<h2>
 
-    <form 
- class="contact-form-section">
+Send Us A Message
 
-    <span class="section-tag">SEND A MESSAGE</span>
+</h2>
 
-    <h2>Get In Touch</h2>
+<form id="contact-form">
 
-    <form id="contact-form" class="contact-form">
+<input
 
-        <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required>
+type="text"
 
-        <input
-            type="tel"
-            name="phone"
-            placeholder="Mobile Number"
-            required>
+name="name"
 
-        <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            required>
+placeholder="Your Name"
 
-        <textarea
-            name="message"
-            rows="6"
-            placeholder="Write your message..."
-            required></textarea>
+required>
 
-        <button type="submit" class="dark-btn">
-            Send Message
-        </button>
+<input
 
-    </form>
+type="tel"
 
-</section>
+name="phone"
 
-<section class="contact-help">
+placeholder="Phone Number"
 
-    <h2>Need Help With Your Order?</h2>
+required>
 
-    <p>
-        The fastest way to place an order or ask a question is through WhatsApp.
-    </p>
+<input
 
-    <a href="https://wa.me/919587492034"
-       class="buy-btn"
-       target="_blank">
+type="email"
 
-        Order on WhatsApp
+name="email"
 
-    </a>
+placeholder="Email Address"
 
-</section>
+required>
 
-<footer class="footer">
+<textarea
+
+name="message"
+
+rows="6"
+
+placeholder="Your Message"
+
+required></textarea>
+
+<button type="submit">
+
+Send Message
+
+</button>
+
+</form>
+
+<div id="status"></div>
+
+</div>
+
+</section><footer class="footer">
 
     <div class="footer-container">
 
@@ -208,20 +213,19 @@ Follow Us
             <a href="index.html">Home</a>
             <a href="shop.html">Shop</a>
             <a href="about.html">Our Story</a>
+            <a href="privacy.html">Privacy Policy</a>
 
         </div>
 
         <div class="footer-social">
 
-            <h3>Follow Us</h3>
+            <h3>Contact</h3>
 
-            <a href="https://instagram.com/the.18freg" target="_blank">
-                @the.18freg
-            </a>
+            <a href="https://wa.me/919587492034" target="_blank">WhatsApp</a>
 
-            <a href="mailto:the18freg@gmail.com">
-                the18freg@gmail.com
-            </a>
+            <a href="mailto:the18freg@gmail.com">the18freg@gmail.com</a>
+
+            <a href="https://instagram.com/the.18freg" target="_blank">@the.18freg</a>
 
         </div>
 
@@ -234,7 +238,48 @@ Follow Us
     </div>
 
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="js/script.js"></script>
+
+<script>
+
+emailjs.init({
+    publicKey: "4lyndCBtAZ2AV1gvh"
+});
+
+const form = document.getElementById("contact-form");
+const status = document.getElementById("status");
+
+form.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    status.innerHTML = "Sending message...";
+
+    emailjs.sendForm(
+        "service_dev7b5f",
+        "template_g268yfu",
+        this
+    )
+
+    .then(function(){
+
+        status.innerHTML = "✅ Message sent successfully.";
+
+        form.reset();
+
+    })
+
+    .catch(function(error){
+
+        console.log(error);
+
+        status.innerHTML = "❌ Failed to send message.";
+
+    });
+
+});
+
+</script>
+
 </body>
+
 </html>
