@@ -127,20 +127,41 @@ Follow Us
 
     <h2>Get In Touch</h2>
 
-    <form class="contact-form">
+    <form 
+ class="contact-form-section">
 
-        <input type="text" placeholder="Your Name" required>
+    <span class="section-tag">SEND A MESSAGE</span>
 
-        <input type="tel" placeholder="Mobile Number" required>
+    <h2>Get In Touch</h2>
 
-        <input type="email" placeholder="Email Address" required>
+    <form id="contact-form" class="contact-form">
 
-        <textarea placeholder="Write your message..." rows="6" required></textarea>
+        <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required>
+
+        <input
+            type="tel"
+            name="phone"
+            placeholder="Mobile Number"
+            required>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required>
+
+        <textarea
+            name="message"
+            rows="6"
+            placeholder="Write your message..."
+            required></textarea>
 
         <button type="submit" class="dark-btn">
-
             Send Message
-
         </button>
 
     </form>
@@ -213,6 +234,7 @@ Follow Us
     </div>
 
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
